@@ -1,0 +1,18 @@
+.phish-tooltip {
+    position: absolute;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 6px;
+    z-index: 999999;
+    pointer-events: none;
+  }
+  
+  .phish-tooltip.safe {
+    background-color: #2ecc71;
+  }
+  
+  .phish-tooltip.phishing {
+    background-color: #e74c3c;
+  }
+  

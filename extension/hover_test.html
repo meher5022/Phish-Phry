@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Detection Hover Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #faf7f3;
+      padding: 30px;
+      color: #333;
+    }
+    h1 { text-align: center; }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    ul { list-style: none; padding-left: 0; }
+    li { margin: 8px 0; }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #b00020;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .box {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+  </style>
+
+  <script>
+    function testURL(event, url) {
+      event.preventDefault();
+
+      fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ url: url })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(
+          "URL: " + url +
+          "\nPrediction: " + data.prediction +
+          "\nConfidence: " + (data.confidence || "N/A")
+        );
+      })
+      .catch(err => {
+        alert("Backend error. Is Flask running?");
+        console.error(err);
+      });
+    }
+  </script>
+</head>
+
+<body>
+
+<h1>🔍 URL Classification Hover Test</h1>
+<p class="note">
+  Hover and click URLs below. Page will NOT redirect.
+</p>
+
+<div class="box">
+
+<h2>✅ Whitelist Override (Always Legitimate)</h2>
+<ul>
+  <li><a href="https://google.com" onclick="testURL(event, this.href)">https://google.com</a></li>
+  <li><a href="https://accounts.google.com" onclick="testURL(event, this.href)">https://accounts.google.com</a></li>
+  <li><a href="https://mail.google.com" onclick="testURL(event, this.href)">https://mail.google.com</a></li>
+  <li><a href="https://github.com" onclick="testURL(event, this.href)">https://github.com</a></li>
+  <li><a href="https://openai.com" onclick="testURL(event, this.href)">https://openai.com</a></li>
+</ul>
+
+<h2>⛔ Blacklist Domains (Always Phishing)</h2>
+<ul>
+  <li><a href="http://goog1e.com" onclick="testURL(event, this.href)">http://goog1e.com</a></li>
+  <li><a href="http://g00gle-login.com" onclick="testURL(event, this.href)">http://g00gle-login.com</a></li>
+  <li><a href="http://secure-google-login.net" onclick="testURL(event, this.href)">http://secure-google-login.net</a></li>
+  <li><a href="http://paypal-verification-alert.com" onclick="testURL(event, this.href)">http://paypal-verification-alert.com</a></li>
+</ul>
+
+<h2>🧠 High Entropy URLs (Random / Obfuscated)</h2>
+<ul>
+  <li><a href="http://xj92kq8z1lq9wqz.com/login" onclick="testURL(event, this.href)">http://xj92kq8z1lq9wqz.com/login</a></li>
+  <li><a href="http://ajw82ks92jd92kq.site/verify" onclick="testURL(event, this.href)">http://ajw82ks92jd92kq.site/verify</a></li>
+</ul>
+
+<h2>🏷️ Brand–Domain Mismatch</h2>
+<ul>
+  <li><a href="http://google-login-secure.net" onclick="testURL(event, this.href)">http://google-login-secure.net</a></li>
+  <li><a href="http://paypal-user-verification.com" onclick="testURL(event, this.href)">http://paypal-user-verification.com</a></li>
+</ul>
+
+<h2>🌐 Excessive Subdomains</h2>
+<ul>
+  <li><a href="http://login.secure.verify.account.google.user.support.com" onclick="testURL(event, this.href)">http://login.secure.verify.account.google.user.support.com</a></li>
+</ul>
+
+<h2>🌍 Suspicious TLDs</h2>
+<ul>
+  <li><a href="http://secure-login-google.tk" onclick="testURL(event, this.href)">http://secure-login-google.tk</a></li>
+  <li><a href="http://paypal-verification.ml" onclick="testURL(event, this.href)">http://paypal-verification.ml</a></li>
+</ul>
+
+<h2>⚠️ Borderline / Suspicious</h2>
+<ul>
+  <li><a href="http://example-login.com" onclick="testURL(event, this.href)">http://example-login.com</a></li>
+  <li><a href="http://mybank-info.com" onclick="testURL(event, this.href)">http://mybank-info.com</a></li>
+</ul>
+
+<h2>🟢 Clean Legitimate URLs</h2>
+<ul>
+  <li><a href="https://wikipedia.org" onclick="testURL(event, this.href)">https://wikipedia.org</a></li>
+  <li><a href="https://stackoverflow.com" onclick="testURL(event, this.href)">https://stackoverflow.com</a></li>
+  <li><a href="https://docs.python.org" onclick="testURL(event, this.href)">https://docs.python.org</a></li>
+</ul>
+
+</div>
+
+</body>
+</html>

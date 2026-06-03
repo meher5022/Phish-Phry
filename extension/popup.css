@@ -1,0 +1,76 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Popup body */
+body {
+  width: 280px;
+  background: lavender;
+  padding: 16px;
+}
+
+/* Card container */
+.container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* Title */
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 14px;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Result text */
+.result {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Status styles */
+.safe {
+  color: #16a34a;
+}
+
+.phishing {
+  color: #dc2626;
+}
+
+/* Optional subtle divider */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 16px 0;
+}

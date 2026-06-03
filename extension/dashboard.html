@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html, body, * {
+      cursor: url("cursor.png") 16 16, auto !important;
+    }
+  </style>
+
+  <meta charset="UTF-8" />
+  <title>URL Detector Dashboard</title>
+
+  <!-- ✅ Updated Google Fonts: Inter + Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-grid">
+  <!-- 1 -->
+  <div class="box">
+    <label>From</label>
+    <input type="date" id="startDate">
+  </div>
+
+  <!-- 2 -->
+  <div class="box">
+    <label>To</label>
+    <input type="date" id="endDate">
+  </div>
+
+  <!-- 3 -->
+  <div class="title-box">
+    <img src="PhishPhry.png" alt="PhishPhry Logo" class="title-logo">
+  </div>
+  
+
+  <!-- 4 -->
+  <div class="box">
+    <button id="applyFilters">Apply Filters</button>
+    <button id="toggleDark">Toggle Dark Mode</button>
+  </div>
+</div>
+
+<!-- ===== SECOND ROW ===== -->
+<div class="second-grid">
+  <!-- 5 -->
+  <div class="box">
+    <label>Category</label>
+    <select id="categoryFilter" multiple>
+      <option value="Phishing">Phishing</option>
+      <option value="Malware">Malware</option>
+      <option value="IDN">IDN</option>
+      <option value="Safe">Safe</option>
+    </select>
+  </div>
+
+  <!-- 6 -->
+  <div class="box wide">
+    <label>Check URL</label>
+  
+    <div class="check-row">
+      <input type="text" id="checkUrlInput" placeholder="Enter URL to check">
+      <button id="checkUrlBtn">Check</button>
+    </div>
+  
+    <p id="checkResult"></p>
+    <div id="checkResult" class="result-card hidden"></div>
+  </div>
+  
+
+  <!-- 7 -->
+  <div class="kpi">
+    <span>% Success</span>
+    <strong id="successRate">0%</strong>
+  </div>
+</div>
+
+
+<!-- ===== KPI ROW ===== -->
+<div class="kpi-grid">
+  <!-- 8 -->
+  <div class="kpi"><span>Total URLs</span><strong id="totalScanned">0</strong></div>
+  <!-- 9 -->
+  <div class="kpi danger"><span>Malicious</span><strong id="totalMalicious">0</strong></div>
+  <!-- 10 -->
+  <div class="kpi safe"><span>Safe</span><strong id="totalSafe">0</strong></div>
+  <!-- 11 -->
+  <div class="kpi"><span>Avg Risk</span><strong id="avgRisk">0%</strong></div>
+</div>
+
+<!-- ===== CHARTS ===== -->
+<div class="charts-grid">
+  <!-- 12 -->
+  <div class="chart"><canvas id="barChart"></canvas></div>
+  <!-- 13 -->
+  <div class="chart"><canvas id="pieChart"></canvas></div>
+  <!-- 14 -->
+  <div class="chart wide"><canvas id="lineChart"></canvas></div>
+</div>
+
+<!-- ===== TABLE ===== -->
+<div class="table-box">
+  <div class="table-title">Scan Logs</div>
+  <table>
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody id="logTable"></tbody>
+  </table>
+</div>
+
+<script src="chart.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
